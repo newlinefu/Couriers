@@ -1,19 +1,24 @@
 package entities;
 
-import java.util.UUID;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "COURIER")
+@Data
 public class Courier {
 
-    private UUID courierId;
+    @Id
+    @Column(name = "COURIER_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long courierId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_country")
     private Branch location;
 
-    public Courier(Branch location) {
-        this.location = location;
-
-        this.courierId = UUID.randomUUID();
-    }
-
-    public UUID getCourierId() {
+    public Long getCourierId() {
         return courierId;
     }
 

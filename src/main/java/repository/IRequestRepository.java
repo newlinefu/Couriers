@@ -1,18 +1,6 @@
 package repository;
 
-import entities.Courier;
 import entities.Request;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Collection;
-import java.util.UUID;
-
-public interface IRequestRepository {
-
-    void addRequest(Request request);
-
-    Request deleteRequest(UUID requestId);
-
-    Request getRequest(UUID requestId);
-
-    Collection<Request> getAll();
-}
+public interface IRequestRepository extends JpaRepository<Request, Long> {}

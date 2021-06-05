@@ -1,18 +1,6 @@
 package repository;
 
 import entities.Message;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Collection;
-import java.util.UUID;
-
-public interface IMessageRepository {
-
-    void addMessage(Message message);
-
-    Message deleteMessage(UUID messageId);
-
-    Message getMessage(UUID messageId);
-
-    Collection<Message> getAll();
-
-}
+public interface IMessageRepository extends JpaRepository<Message, Long> {}

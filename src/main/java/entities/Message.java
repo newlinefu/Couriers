@@ -1,15 +1,21 @@
 package entities;
 
-import java.util.UUID;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "MESSAGE")
+@Data
 public class Message {
-    private UUID messageId;
-    private String content;
 
-    public Message(String content) {
-        this.content = content;
-        this.messageId = UUID.randomUUID();
-    }
+    @Id
+    @Column(name = "MESSAGE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long messageId;
+
+    @Column(name = "CONTENT")
+    private String content;
 
     public String getContent() {
         return content;
@@ -19,7 +25,7 @@ public class Message {
         this.content = content;
     }
 
-    public UUID getMessageId() {
+    public Long getMessageId() {
         return messageId;
     }
 }

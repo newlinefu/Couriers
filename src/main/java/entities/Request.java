@@ -1,32 +1,41 @@
 package entities;
 
+import javax.persistence.*;
 import java.sql.Date;
-import java.util.UUID;
 
 public class Request {
 
-    private UUID requestId;
+    @Id
+    @Column(name = "REQUEST_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long requestId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "STARTED_BRANCH")
     private Branch startedBranch;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TARGET_BRANCH")
     private Branch targetBranch;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_MESSAGE")
     private Message message;
+
+    @Column(name = "URGENCY")
     private int urgency;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_COURIER")
     private Courier courier;
+
+    @Column(name = "START_TIME")
     private Date startTime;
+
+    @Column(name = "END_TIME")
     private Date endTime;
 
-    public Request(Branch startedBranch, Branch targetBranch, Message message, int urgency, Courier courier, Date startTime, Date endTime) {
-        this.startedBranch = startedBranch;
-        this.targetBranch = targetBranch;
-        this.message = message;
-        this.urgency = urgency;
-        this.courier = courier;
-        this.startTime = startTime;
-        this.endTime = endTime;
-
-        requestId = UUID.randomUUID();
-    }
-
-    public UUID getRequestId() {
+    public Long getRequestId() {
         return requestId;
     }
 
@@ -90,7 +99,6 @@ public class Request {
         if (startTime == null || endTime == null) {
             return 0;
         }
-
         return (int)((endTime.getTime() - startTime.getTime()) / 1000 / 60);
     }
 }

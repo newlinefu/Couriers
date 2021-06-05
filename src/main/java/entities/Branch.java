@@ -1,18 +1,23 @@
 package entities;
 
-import java.util.UUID;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "BRANCH")
+@Data
 public class Branch {
-    private UUID branchId;
+
+    @Id
+    @Column(name = "BRANCH_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long branchId;
+
+    @Column(name = "BRANCH_NAME")
     private String name;
 
-    public Branch(String name) {
-        this.name = name;
-
-        this.branchId = UUID.randomUUID();
-    }
-
-    public UUID getBranchId() {
+    public Long getBranchId() {
         return branchId;
     }
 

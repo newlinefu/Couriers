@@ -1,16 +1,7 @@
 package repository;
 
 import entities.Branch;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Collection;
-import java.util.UUID;
 
-public interface IBranchRepository {
-    void addMessage(Branch branch);
-
-    Branch deleteBranch(UUID branchId);
-
-    Branch getBranch(UUID branchId);
-
-    Collection<Branch> getAll();
-}
+public interface IBranchRepository extends JpaRepository<Branch, Long> {}
